@@ -1,0 +1,125 @@
+[gd_scene load_steps=18 format=3 uid="uid://dxo8c1uu7bfxu"]
+
+[ext_resource type="Script" path="res://Projectiles/effect/fire_pool.gd" id="1_kcj0t"]
+[ext_resource type="Texture2D" uid="uid://0t0od6efv8hj" path="res://Sprites/Lava Pool.png" id="2_pib0c"]
+[ext_resource type="AudioStream" uid="uid://ks26nr1i6pom" path="res://Sounds/fireWhoosh.mp3" id="3_3kxbq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cpae4"]
+atlas = ExtResource("2_pib0c")
+region = Rect2(0, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwb6u"]
+atlas = ExtResource("2_pib0c")
+region = Rect2(320, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kxivc"]
+atlas = ExtResource("2_pib0c")
+region = Rect2(640, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sh33u"]
+atlas = ExtResource("2_pib0c")
+region = Rect2(0, 320, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5hr6o"]
+atlas = ExtResource("2_pib0c")
+region = Rect2(320, 320, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60n4h"]
+atlas = ExtResource("2_pib0c")
+region = Rect2(640, 320, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sc8uy"]
+atlas = ExtResource("2_pib0c")
+region = Rect2(0, 640, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1sk7u"]
+atlas = ExtResource("2_pib0c")
+region = Rect2(320, 640, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fnoan"]
+atlas = ExtResource("2_pib0c")
+region = Rect2(640, 640, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_al8ps"]
+atlas = ExtResource("2_pib0c")
+region = Rect2(0, 960, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s673v"]
+atlas = ExtResource("2_pib0c")
+region = Rect2(320, 960, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eo7yd"]
+atlas = ExtResource("2_pib0c")
+region = Rect2(640, 960, 320, 320)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ypirl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cpae4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cwb6u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kxivc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sh33u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5hr6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60n4h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sc8uy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1sk7u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fnoan")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_al8ps")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s673v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eo7yd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q0y7g"]
+radius = 40.25
+
+[node name="FirePool" type="Area2D" groups=["Fireball"]]
+show_behind_parent = true
+z_as_relative = false
+collision_mask = 2
+script = ExtResource("1_kcj0t")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.42, 0.42)
+sprite_frames = SubResource("SpriteFrames_ypirl")
+autoplay = "default"
+frame_progress = 0.559879
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_q0y7g")
+
+[node name="fireWhoosh" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_3kxbq")
+pitch_scale = 0.26
+autoplay = true
+
+[node name="FireCooldown" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

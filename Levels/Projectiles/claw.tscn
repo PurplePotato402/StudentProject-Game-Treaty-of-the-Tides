@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://2anwpmlqs6t3"]
+
+[ext_resource type="Script" path="res://Projectiles/Claw.gd" id="1_5cqi7"]
+[ext_resource type="Texture2D" uid="uid://bew5g1ietg01o" path="res://Sprites/MobSprites/CrabClaw.png" id="2_p5k7b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u52xg"]
+atlas = ExtResource("2_p5k7b")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4k3e"]
+atlas = ExtResource("2_p5k7b")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r38h8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u52xg")
+}],
+"loop": true,
+"name": &"chargeup",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r4k3e")
+}],
+"loop": true,
+"name": &"cooldown",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mycha"]
+radius = 20.5
+height = 65.0
+
+[node name="Claw" type="CharacterBody2D"]
+collision_mask = 2
+script = ExtResource("1_5cqi7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(23, 5)
+scale = Vector2(0.888672, 0.888672)
+sprite_frames = SubResource("SpriteFrames_r38h8")
+animation = &"chargeup"
+
+[node name="Chargeup" type="Timer" parent="."]
+wait_time = 0.001
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(12.5, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_mycha")
+
+[connection signal="timeout" from="Chargeup" to="." method="_on_chargeup_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://c7er4rwf2m0ye"]
+
+[ext_resource type="PackedScene" uid="uid://dhymhbf5l3yg6" path="res://Enemies/enemy.tscn" id="1_61uj7"]
+[ext_resource type="Script" path="res://misc/BeachBarrier.gd" id="2_ykiuw"]
+[ext_resource type="Texture2D" uid="uid://c7x0s3uqacge1" path="res://Sprites/Terrain/giant-trees.png" id="3_qvqg1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40ixg"]
+atlas = ExtResource("3_qvqg1")
+region = Rect2(850, 576, 170, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w7glk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_40ixg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qjek1"]
+size = Vector2(225, 110)
+
+[node name="BeachBarrier" instance=ExtResource("1_61uj7")]
+script = ExtResource("2_ykiuw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="2"]
+position = Vector2(47.8125, 18)
+scale = Vector2(1.5625, 1.5625)
+sprite_frames = SubResource("SpriteFrames_w7glk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
+position = Vector2(37.5, 19)
+shape = SubResource("RectangleShape2D_qjek1")

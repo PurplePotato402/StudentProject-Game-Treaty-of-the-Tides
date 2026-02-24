@@ -1,0 +1,109 @@
+[gd_scene load_steps=13 format=3 uid="uid://sl6nfq1okae1"]
+
+[ext_resource type="PackedScene" uid="uid://dhymhbf5l3yg6" path="res://Enemies/enemy.tscn" id="1_5e7by"]
+[ext_resource type="Script" path="res://Enemies/tower_archer.gd" id="2_d6ueq"]
+[ext_resource type="Texture2D" uid="uid://bas7ln7cqa3x0" path="res://Sprites/MobSprites/towerArcher.png" id="3_nn7ve"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1trr3"]
+radius = 19.57
+height = 54.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l884j"]
+atlas = ExtResource("3_nn7ve")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fgxbh"]
+atlas = ExtResource("3_nn7ve")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qguea"]
+atlas = ExtResource("3_nn7ve")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0iai1"]
+atlas = ExtResource("3_nn7ve")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lybab"]
+atlas = ExtResource("3_nn7ve")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v1f42"]
+atlas = ExtResource("3_nn7ve")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0v7d"]
+atlas = ExtResource("3_nn7ve")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kpopa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l884j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgxbh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgxbh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgxbh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgxbh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qguea")
+}],
+"loop": true,
+"name": &"chargeup",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0iai1")
+}],
+"loop": true,
+"name": &"cooldown",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lybab")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v1f42")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e0v7d")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]
+
+[node name="TowerArcher" instance=ExtResource("1_5e7by")]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("2_d6ueq")
+bullet = null
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+shape = SubResource("CapsuleShape2D_1trr3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="3"]
+scale = Vector2(0.42, 0.42)
+sprite_frames = SubResource("SpriteFrames_kpopa")
+animation = &"chargeup"

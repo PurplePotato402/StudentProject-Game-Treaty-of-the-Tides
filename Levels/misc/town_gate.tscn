@@ -1,0 +1,87 @@
+[gd_scene load_steps=11 format=3 uid="uid://cqhausksfq0i6"]
+
+[ext_resource type="Script" path="res://misc/obstacle.gd" id="1_f7sk3"]
+[ext_resource type="Texture2D" uid="uid://d1dms6ebf0sjd" path="res://Sprites/Terrain/Town Gate Spritesheet.png" id="3_xn2rw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nx2nw"]
+atlas = ExtResource("3_xn2rw")
+region = Rect2(96, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4jybk"]
+atlas = ExtResource("3_xn2rw")
+region = Rect2(96, 192, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_te6f4"]
+atlas = ExtResource("3_xn2rw")
+region = Rect2(96, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40i0k"]
+atlas = ExtResource("3_xn2rw")
+region = Rect2(96, 64, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_asynh"]
+atlas = ExtResource("3_xn2rw")
+region = Rect2(96, 128, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jx5o1"]
+atlas = ExtResource("3_xn2rw")
+region = Rect2(96, 192, 96, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ghql4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nx2nw")
+}],
+"loop": true,
+"name": &"Closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4jybk")
+}],
+"loop": true,
+"name": &"Open",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_te6f4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_40i0k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_asynh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jx5o1")
+}],
+"loop": true,
+"name": &"Opening",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7rbs2"]
+size = Vector2(70, 60)
+
+[node name="TownGate" type="StaticBody2D" groups=["smashable"]]
+collision_layer = 4
+script = ExtResource("1_f7sk3")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+max_speed = 10000.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ghql4")
+animation = &"Closed"
+autoplay = "Closed"
+frame_progress = 0.210797
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7rbs2")

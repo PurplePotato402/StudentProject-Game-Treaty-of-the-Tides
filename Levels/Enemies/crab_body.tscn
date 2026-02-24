@@ -1,0 +1,171 @@
+[gd_scene load_steps=21 format=3 uid="uid://daq6r7oxgdvom"]
+
+[ext_resource type="Script" path="res://Enemies/crab_body.gd" id="1_pw1cf"]
+[ext_resource type="Texture2D" uid="uid://5w08mwaxkdkg" path="res://Sprites/MobSprites/CrabBody.png" id="2_cbast"]
+[ext_resource type="Texture2D" uid="uid://ce8wy1rbeeb2w" path="res://Sprites/Cracks.png" id="3_7qec6"]
+[ext_resource type="AudioStream" uid="uid://cvs8p4a17wgmf" path="res://Sounds/Falling Rock.wav" id="4_w4p0h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7b6k7"]
+size = Vector2(300, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0icem"]
+atlas = ExtResource("2_cbast")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eecf1"]
+atlas = ExtResource("2_cbast")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gt4y2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0icem")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eecf1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tiuld"]
+atlas = ExtResource("3_7qec6")
+region = Rect2(640, 1280, 640, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m72kb"]
+atlas = ExtResource("3_7qec6")
+region = Rect2(0, 0, 640, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0m1t"]
+atlas = ExtResource("3_7qec6")
+region = Rect2(640, 0, 640, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pbp17"]
+atlas = ExtResource("3_7qec6")
+region = Rect2(0, 640, 640, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_myx8e"]
+atlas = ExtResource("3_7qec6")
+region = Rect2(640, 640, 640, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxwwb"]
+atlas = ExtResource("3_7qec6")
+region = Rect2(0, 1280, 640, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fqtbb"]
+atlas = ExtResource("3_7qec6")
+region = Rect2(0, 0, 640, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jl3x7"]
+atlas = ExtResource("3_7qec6")
+region = Rect2(640, 0, 640, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2o63u"]
+atlas = ExtResource("3_7qec6")
+region = Rect2(0, 640, 640, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbjsh"]
+atlas = ExtResource("3_7qec6")
+region = Rect2(640, 640, 640, 640)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_he8kd"]
+atlas = ExtResource("3_7qec6")
+region = Rect2(0, 1280, 640, 640)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_okcqs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tiuld")
+}],
+"loop": true,
+"name": &"Crack0",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m72kb")
+}],
+"loop": true,
+"name": &"Crack1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b0m1t")
+}],
+"loop": true,
+"name": &"Crack2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pbp17")
+}],
+"loop": true,
+"name": &"Crack3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_myx8e")
+}],
+"loop": true,
+"name": &"Crack4",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rxwwb")
+}],
+"loop": true,
+"name": &"Crack5",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fqtbb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jl3x7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2o63u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nbjsh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_he8kd")
+}],
+"loop": true,
+"name": &"Cracks",
+"speed": 2.0
+}]
+
+[node name="CrabBody" type="CharacterBody2D" groups=["enemy"]]
+collision_mask = 2
+script = ExtResource("1_pw1cf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7b6k7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = -1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_gt4y2")
+autoplay = "default"
+
+[node name="AnimatedSprite2D_Cracks" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_okcqs")
+animation = &"Crack0"
+
+[node name="Death" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_w4p0h")
+volume_db = -21.79
+pitch_scale = 2.74
+
+[connection signal="finished" from="Death" to="." method="deleteCrab"]

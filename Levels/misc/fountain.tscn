@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bicciaufh6w0x"]
+
+[ext_resource type="Texture2D" uid="uid://eqwj25oxsqvj" path="res://Sprites/fountain.png" id="1_4gpua"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wjwjl"]
+size = Vector2(20, 39)
+
+[node name="Fountain" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-5, -9.5)
+shape = SubResource("RectangleShape2D_wjwjl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_4gpua")

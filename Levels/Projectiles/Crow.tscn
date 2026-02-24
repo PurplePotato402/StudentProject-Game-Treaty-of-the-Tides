@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=3 uid="uid://b1ntgkrcfrv48"]
+
+[ext_resource type="Script" path="res://Projectiles/Crow.gd" id="1_blw16"]
+[ext_resource type="Texture2D" uid="uid://btqj3g51kper0" path="res://Sprites/MobSprites/Crow.png" id="2_txd0c"]
+[ext_resource type="AudioStream" uid="uid://q3rumql4e1y2" path="res://Sounds/crow.mp3" id="3_5hfeg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_120gb"]
+atlas = ExtResource("2_txd0c")
+region = Rect2(320, 320, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ftl6u"]
+atlas = ExtResource("2_txd0c")
+region = Rect2(320, 0, 320, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dsetx"]
+atlas = ExtResource("2_txd0c")
+region = Rect2(0, 0, 320, 320)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mv31k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_120gb")
+}],
+"loop": true,
+"name": &"Dash",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ftl6u")
+}],
+"loop": true,
+"name": &"Default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dsetx")
+}],
+"loop": true,
+"name": &"Sitting",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hte7c"]
+
+[node name="Crow" type="CharacterBody2D" groups=["enemy", "projectile"]]
+collision_layer = 7
+collision_mask = 7
+script = ExtResource("1_blw16")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(-0.1, -0.1)
+sprite_frames = SubResource("SpriteFrames_mv31k")
+animation = &"Sitting"
+autoplay = "Sitting"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hte7c")
+
+[node name="DashTimer" type="Timer" parent="." groups=["enemy"]]
+one_shot = true
+
+[node name="InvulTimer" type="Timer" parent="."]
+
+[node name="crow" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_5hfeg")
+volume_db = -20.0
+
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="InvulTimer" to="." method="_on_invul_timer_timeout"]

@@ -1,0 +1,127 @@
+[gd_scene load_steps=18 format=3 uid="uid://cnfqsorusshnv"]
+
+[ext_resource type="PackedScene" uid="uid://dhymhbf5l3yg6" path="res://Enemies/enemy.tscn" id="1_a35nh"]
+[ext_resource type="Script" path="res://Enemies/archer_castle.gd" id="2_qp16x"]
+[ext_resource type="PackedScene" uid="uid://bfw1hbnyltbpl" path="res://Projectiles/arrow.tscn" id="3_8u722"]
+[ext_resource type="Texture2D" uid="uid://cgh1twk10x24k" path="res://Sprites/MobSprites/Archer-Castle.png" id="4_dsm3k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l2vma"]
+atlas = ExtResource("4_dsm3k")
+region = Rect2(0, 384, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_17sds"]
+atlas = ExtResource("4_dsm3k")
+region = Rect2(128, 384, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgri1"]
+atlas = ExtResource("4_dsm3k")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8sdlf"]
+atlas = ExtResource("4_dsm3k")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1g768"]
+atlas = ExtResource("4_dsm3k")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mwpis"]
+atlas = ExtResource("4_dsm3k")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jvhma"]
+atlas = ExtResource("4_dsm3k")
+region = Rect2(128, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0q8sg"]
+atlas = ExtResource("4_dsm3k")
+region = Rect2(256, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_81wpf"]
+atlas = ExtResource("4_dsm3k")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wwhh"]
+atlas = ExtResource("4_dsm3k")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cohvl"]
+atlas = ExtResource("4_dsm3k")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n0xyc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l2vma")
+}],
+"loop": true,
+"name": &"chargeup",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_17sds")
+}],
+"loop": true,
+"name": &"cooldown",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pgri1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8sdlf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1g768")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mwpis")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jvhma")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0q8sg")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_81wpf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4wwhh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cohvl")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7h4dp"]
+radius = 15.0
+height = 56.0
+
+[node name="Archer-Castle" instance=ExtResource("1_a35nh")]
+script = ExtResource("2_qp16x")
+bullet = ExtResource("3_8u722")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="2"]
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_n0xyc")
+animation = &"down"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
+shape = SubResource("CapsuleShape2D_7h4dp")

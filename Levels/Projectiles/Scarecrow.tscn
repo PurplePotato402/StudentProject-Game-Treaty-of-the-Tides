@@ -1,0 +1,100 @@
+[gd_scene load_steps=13 format=3 uid="uid://26ynesm54gn8"]
+
+[ext_resource type="Script" path="res://Projectiles/Scarecrow.gd" id="1_8lofx"]
+[ext_resource type="Texture2D" uid="uid://bh20rui78wscv" path="res://Sprites/MobSprites/ScareCrow.png" id="2_k5a7u"]
+[ext_resource type="AudioStream" uid="uid://b6ddela31vg2w" path="res://Sounds/dash.mp3" id="3_a6nab"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymekr"]
+atlas = ExtResource("2_k5a7u")
+region = Rect2(0, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nmocf"]
+atlas = ExtResource("2_k5a7u")
+region = Rect2(160, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l1us2"]
+atlas = ExtResource("2_k5a7u")
+region = Rect2(320, 0, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qj617"]
+atlas = ExtResource("2_k5a7u")
+region = Rect2(0, 160, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l253r"]
+atlas = ExtResource("2_k5a7u")
+region = Rect2(160, 160, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uepdy"]
+atlas = ExtResource("2_k5a7u")
+region = Rect2(320, 160, 160, 160)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jb42e"]
+atlas = ExtResource("2_k5a7u")
+region = Rect2(0, 0, 160, 160)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mv31k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ymekr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nmocf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l1us2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qj617")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l253r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uepdy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nmocf")
+}],
+"loop": true,
+"name": &"Dash",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jb42e")
+}],
+"loop": true,
+"name": &"Default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hte7c"]
+
+[node name="Scarecrow" type="CharacterBody2D" groups=["enemy", "projectile"]]
+collision_layer = 20
+collision_mask = 0
+script = ExtResource("1_8lofx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = -1.5708
+scale = Vector2(-0.2, -0.2)
+sprite_frames = SubResource("SpriteFrames_mv31k")
+animation = &"Dash"
+autoplay = "Default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hte7c")
+
+[node name="DashTimer" type="Timer" parent="." groups=["enemy"]]
+one_shot = true
+
+[node name="InvulTimer" type="Timer" parent="."]
+
+[node name="DashSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_a6nab")
+volume_db = -21.55
+pitch_scale = 0.72
+
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="InvulTimer" to="." method="_on_invul_timer_timeout"]

@@ -1,0 +1,101 @@
+[gd_scene load_steps=14 format=3 uid="uid://3cyep1niohc0"]
+
+[ext_resource type="Script" path="res://Enemies/Spawner.gd" id="1_hpb3u"]
+[ext_resource type="Texture2D" uid="uid://d1dms6ebf0sjd" path="res://Sprites/Terrain/Town Gate Spritesheet.png" id="2_qay5l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x53kl"]
+atlas = ExtResource("2_qay5l")
+region = Rect2(96, 192, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmxam"]
+atlas = ExtResource("2_qay5l")
+region = Rect2(96, 128, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xeiiy"]
+atlas = ExtResource("2_qay5l")
+region = Rect2(96, 64, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_868ps"]
+atlas = ExtResource("2_qay5l")
+region = Rect2(96, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f24jj"]
+atlas = ExtResource("2_qay5l")
+region = Rect2(96, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kt0iu"]
+atlas = ExtResource("2_qay5l")
+region = Rect2(96, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a4pep"]
+atlas = ExtResource("2_qay5l")
+region = Rect2(96, 64, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmvci"]
+atlas = ExtResource("2_qay5l")
+region = Rect2(96, 128, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2sh52"]
+atlas = ExtResource("2_qay5l")
+region = Rect2(96, 192, 96, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6mhha"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x53kl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xmxam")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xeiiy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_868ps")
+}],
+"loop": true,
+"name": &"close",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f24jj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kt0iu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a4pep")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gmvci")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2sh52")
+}],
+"loop": true,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6fdas"]
+size = Vector2(50, 50)
+
+[node name="Spawner" type="StaticBody2D" groups=["smashable"]]
+script = ExtResource("1_hpb3u")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_6mhha")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_6fdas")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

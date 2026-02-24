@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhymhbf5l3yg6"]
+
+[ext_resource type="Script" path="res://Enemies/enemy.gd" id="1_5v515"]
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 4
+wall_min_slide_angle = 0.0
+script = ExtResource("1_5v515")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+max_speed = 10000.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
